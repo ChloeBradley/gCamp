@@ -21,10 +21,19 @@
 }
 
 .panel {
-
   border-radius:0px;
  }
 
  .body_container {
    height: 300px;
+ }
+
+ a.social {
+   float: right;
+   padding: 0px 3px;
+ }
+
+ div#footer {
+   margin-left: 15px;
+   margin-right: 15px;
  }
