@@ -3,35 +3,40 @@
 </head>
 
 
-<div class="container-fluid">
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">gCamp</a>
+      <a class="navbar-brand" href="#"style="text-indent:90px;">gCamp</a>
     </div>
+  </div><!-- /.container-fluid -->
 </nav>
+
+<div class="padding">
 </div>
 
 
 <div class="container">
 
-</br>
 
-<div class="jumbotron">
-  <h1>gCamp</h1>
-  <p>your life, organized.</p>
-</div>
+  <div class="jumbotron">
+    <h1>gCamp</h1>
+    <p>your life, organized.</p>
+  </div>
 
-<div class=row >
-  <div class="col-md-4">
-    <%=image_tag("two.jpg", class: "img-responsive")%>
+
+  <div class=row >
+    <div class="col-md-4">
+      <%=image_tag("two.jpg", class: "img-responsive")%>
+    </div>
+
+    <div class="col-md-4">
+      <%=image_tag("one.jpg", class: "img-responsive")%>
+    </div>
+
+    <div class="col-md-4">
+      <%=image_tag("three.jpg", class: "img-responsive")%>
+    </div>
   </div>
-  <div class="col-md-4">
-    <%=image_tag("one.jpg", class: "img-responsive")%>
-  </div>
-  <div class="col-md-4">
-    <%=image_tag("three.jpg", class: "img-responsive")%>
-  </div>
-</div>
 
 </br>
 
@@ -63,10 +68,10 @@
         <h3 class="panel-title">Title</h3>
       </div>
       <div class="panel-body">
-        <li><ul>comment on tasks and documents</ul></li>
-        <li><ul> get email notifications</ul>
-
-        </li>
+        <ul>
+          <li>Comment on tasks and documents</li>
+          <li>Get email notifications</li>
+        </ul>
       </div>
     </div>
   </div>
