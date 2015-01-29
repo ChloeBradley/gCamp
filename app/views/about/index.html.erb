@@ -4,13 +4,14 @@
   </div>
 </nav>
 
-<div class="container"
+<div class="container">
 <div class="page-header">
-  <h1>About</h1><hr></hr>
-</div>
+  <h1>About</h1>
 </div>
 
 
+
+<div class="body_container">
 
 <div class="col-md-4">
   <div class="media">
@@ -27,15 +28,21 @@
   <p>We are dedicated to the makers, the creators, the risk-takers.
   </p>
       <br>
-  <p>We wake up in the middle of the night and furiously write down ideas about how to make your online life better.
+      <p>We wake up in the middle of the night and furiously write down ideas about how to make your online life better.
   </p>
       <br/>
-  <p>Human collaboration and communication is what drives us, and it infuses every feature of gCamp.
+      <p>Human collaboration and communication is what drives us, and it infuses every feature of gCamp.
   </p>
+</div>
+</div>
 
-</div>
-<br>
-<br/>
 
+<div id="footer">
+  <dl>
+    <hr></hr>
+    <u><%= link_to "Terms", terms_path() %></u> |
+    <u><%= link_to "About", about_path() %></u>
+  </dl>
 </div>
 </div>
+</div> !----container closed---
