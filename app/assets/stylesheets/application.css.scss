@@ -16,6 +16,7 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
+
  .padding {
    height:20px;
  }
@@ -37,7 +38,7 @@
    padding: 0px 3px;
  }
 
- div#footer {
-   margin-left: 15px;
-   margin-right: 15px;
- }
+.welcome.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
