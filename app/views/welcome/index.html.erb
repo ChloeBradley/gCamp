@@ -64,7 +64,7 @@
   </div>
 
 <div>
-  <%= @quote.each do |review| %>
+  <% @quote.each do |review| %>
   <div class='quote'> <%= review[0] %></div>
 <div class='text-muted'> <%= review[1] %></div>
   <% end %>
@@ -73,7 +73,8 @@
   <div class="welcome footer">
     <div class="col-md-6" style="border-top: 1px solid lightgrey;padding: 10px 0px;margin-top: 20px;">
       <%= link_to "Terms", terms_path() %> |
-      <%= link_to "About", about_path() %>
+      <%= link_to "About", about_path() %> |
+      <%= link_to "FAQ",  faq_path() %>
     </div>
 
 
