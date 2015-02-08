@@ -15,7 +15,7 @@ class CommonQuestionsController < ApplicationController
       "How do I join gCamp?",
       "As soon as it's ready for the public, you'll see a signup link in the upper right.
         Once that's there, just click it and fill in the form!",
-      "How-do-I-join_gCamp?"
+      "How-do-I-join-gCamp?"
       )
 
       faq2 = CommonQuestion.new(
