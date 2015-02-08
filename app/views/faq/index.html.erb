@@ -12,8 +12,11 @@
 
   <br>
 
-  <p><h3>What is Gcamp?</h3></p>
-
+<div>
+        <% @commonquestions.each do |display|%>
+        <%= display[0] %>
+        <% end %>
+</div>
   <br>
 
   <p>gCamp is an awesome tool that is going to change your life.  gCamp

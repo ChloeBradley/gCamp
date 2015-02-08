@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'terms' => 'terms#index'
   get 'about' => 'about#index'
   get 'faq'   => 'faq#index'
+  get '/faq/commonquestions', to: 'faq/commonquestion#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
