@@ -1,0 +1,21 @@
+<div class='container'>
+  <h1>New Task</h1>
+<br>
+
+<br>
+
+<div class="input-group">
+  <div class="form-control">
+    <%= form_for @tasks do |f| %>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  <br>
+
+  <div>
+    <%= f.submit %>
+  </div>
+  <% end %>
+</div>
+</div>
