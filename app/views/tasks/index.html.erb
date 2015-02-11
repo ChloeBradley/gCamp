@@ -5,6 +5,7 @@
 
 <%= @tasks.each do |task| %>
   <%= link_to 'Show', show_path() %>
-  <%= link_to 'edit', new_task_path %>
+  <%= link_to 'Edit', new_task_path %>
+  <%= link_to 'Destroy', tasks_path(@task), method: :delete %>
   <% end %>
 </div>
