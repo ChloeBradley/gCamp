@@ -1,17 +1,14 @@
 <div class="padding">
 </div>
 
-
 <div class="container">
-
-
   <div class="jumbotron">
     <h1>gCamp</h1>
     <p>your life, organized.</p>
   </div>
 
 
-  <div class=row >
+  <div class="row">
     <div class="col-md-4">
       <%=image_tag("two.jpg", class: "img-responsive")%>
     </div>
@@ -25,63 +22,52 @@
     </div>
   </div>
 
-</br>
+  </br>
 
-<div class=row >
-  <div class="col-md-4">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">Tasks</h3>
-      </div>
-      <div class="panel-body">
-        Grouped by projects by lists. Just the way you like em'
+  <div class="row">
+    <div class="col-md-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Tasks</h3>
+        </div>
+        <div class="panel-body">
+          Grouped by projects by lists. Just the way you like em'
+        </div>
       </div>
     </div>
 
+    <div class="col-md-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Permissions</h3>
+        </div>
+        <div class="panel-body">
+          Fine-grained permissions
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Title</h3>
+        </div>
+        <div class="panel-body">
+          <ul>
+            <li>Comment on tasks and documents</li>
+            <li>Get email notifications</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div><!-- row -->
+
+  <div>
+    <% @quote.each do |review| %>
+      <p class='quote'> <%= review[0] %></p>
+      <p class='text-muted'> <%= review[1] %></p>
+    <% end %>
   </div>
-  <div class="col-md-4">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">Permissions</h3>
-      </div>
-      <div class="panel-body">
-        Fine-grained permissions
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">Title</h3>
-      </div>
-      <div class="panel-body">
-        <ul>
-          <li>Comment on tasks and documents</li>
-          <li>Get email notifications</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-<div>
-  <% @quote.each do |review| %>
-  <p class='quote'> <%= review[0] %></p>
-<p class='text-muted'> <%= review[1] %></p>
-  <% end %>
-</div>
-
-  <div class="welcome footer">
-    <div class="col-md-6" style="border-top: 1px solid lightgrey;padding: 10px 0px;margin-top: 20px;">
-      <%= link_to "Terms", terms_path() %> |
-      <%= link_to "About", about_path() %> |
-      <%= link_to "FAQ",  faq_path() %>
-    </div>
 
 
-    <div class="col-md-6 text-right" style="border-top: 1px solid lightgrey;padding: 10px 0px;margin-top: 20px;">
-      <%= link_to image_tag('linkedin.jpg', class: 'custom_image'),'https://www.linkedin.com/in/ChloeBradley1' %>
-      <%= link_to image_tag('Github.png', class: 'custom_image'),'https://github.com/ChloeBradley' %>
-      <%= link_to image_tag('twitter.png', class: 'custom_image'),'https://twitter.com/ccbradley77' %>
-      <%= link_to image_tag('Galvanize.png', class: 'custom_image'),'https://www.galvanize.it' %>
-    </div>
-  </div>
+</div> <!-- container -->
