@@ -1,16 +1,22 @@
 <div class = 'container'>
   <h1>Listing Tasks</h1>
-  <p><b>Description<b></p>
-  <p>test task</p>
+  <p><b>Description</b></p>
 </div>
 
 <br/>
 <div class='container'>
+  <div>
+  <% @tasks.each do |task| %>
+    <%= task.description %>
+    <%= link_to 'Show', task_path(task) %>
+    <%= link_to 'Edit', edit_task_path(task) %>
+    <%= link_to 'Destroy', task_path(task), method: :delete %>
+    <% end %>
+  </div>
+
+<br>
+
 <div>
-<% @tasks.each do |task| %>
-  <%= task.description %>
-  <%= link_to 'Show', task_path(task) %>
-  <%= link_to 'Edit', edit_task_path(task) %>
-  <%= link_to 'Destroy', task_path(task), method: :delete %>
-  <% end %>
+  <%= link_to 'New Task', new_task_path %>
+</div>
 </div>

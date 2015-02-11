@@ -14,6 +14,14 @@ class TasksController < ApplicationController
       redirect_to tasks_path
     end
 
+    def create
+      @tasks = Task.new(params[:id])
+    end
+
+    def new
+      @tasks = Task.new
+    end
+
 
   private
 
