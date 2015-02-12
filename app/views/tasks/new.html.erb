@@ -1,21 +1,17 @@
 <div class='container'>
   <h1>New Task</h1>
-<br>
 
-<br>
-
-<div class="input-group">
-  <div class="form-control">
-    <%= form_for @tasks do |f| %>
-    <%= f.label :description %>
-    <%= f.text_field :description %>
+<%= form_for Task.new do |f| %>
+  <div>
+    <%= f.label :name, 'Description' %>
+    <p><%= f.text_field :description %></p>
   </div>
+
+    <%= f.submit %>
+  <% end %>
 
   <br>
 
-  <div>
-    <%= f.submit %>
-  </div>
-  <% end %>
-</div>
+  <%= link_to 'Back', tasks_path %>
+
 </div>

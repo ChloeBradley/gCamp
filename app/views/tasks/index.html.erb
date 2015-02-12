@@ -7,7 +7,7 @@
 <div class='container'>
   <div>
   <% @tasks.each do |task| %>
-    <%= task.description %>
+    <%= link_to task.description, task_path(task) %>
     <%= link_to 'Show', task_path(task) %>
     <%= link_to 'Edit', edit_task_path(task) %>
     <%= link_to 'Destroy', task_path(task), method: :delete %>

@@ -5,11 +5,11 @@ class TasksController < ApplicationController
 
 
   def show
-    @tasks = Task.find(params[:id])
+    @task = Task.find(params[:id])
   end
 
   def edit
-    @tasks = Task.find(params[:id])
+    @task = Task.find(params[:id])
   end
     def destroy
       task= Task.find(params[:id])
