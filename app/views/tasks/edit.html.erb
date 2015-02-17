@@ -3,12 +3,27 @@
 <div>
   <div class= 'container'>
     <h1> Editing task </h1>
+
     <div class="alert alert-success" role="alert"><%= notice %></div>
-    <p><%= f.label :name, 'Description' %></p>
-  <p><%= f.text_field :description %></p>
 
 
-<%= f.submit "Update Task" %>
-</div>
-</div>
+    <div class= 'form-group'>
+      <div class="col-md-1">
+        <%= f.label :name, 'Description', class: "control-label" %>
+      </div>
+
+      <div class= "col-md-4">
+        <%= f.text_field :description, class: "form-control" %>
+      </div>
+
+      <br>
+      <br>
+      <div class= "form-group">
+        <div class= "col-md-offset-1 col-md-11">
+          <%= f.submit "Create Task", class: "btn btn-primary" %>
+          <%= link_to "cancel", tasks_path, class: "btn btn-default" %>
+        </div>
+      </div>
+      </div>
+    </div>
 <% end %>

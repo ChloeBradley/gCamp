@@ -10,10 +10,6 @@ class TasksController < ApplicationController
 
   def edit
     @task = Task.find(params[:id])
-     if @task.update(task_params)
-      flash[:notice] = "task was successfully updated!"
-      redirect_to task_path(@task)
-    end
   end
 
     def destroy
@@ -45,7 +41,6 @@ class TasksController < ApplicationController
     def new
       @tasks = Task.new
     end
-  end
 
 
   private
@@ -53,3 +48,4 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:description)
   end
+end
