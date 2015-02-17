@@ -10,6 +10,10 @@ class TasksController < ApplicationController
 
   def edit
     @task = Task.find(params[:id])
+     if @task.update(task_params)
+      flash[:notice] = "task was successfully updated!"
+      redirect_to task_path(@task)
+    end
   end
 
     def destroy
@@ -21,7 +25,7 @@ class TasksController < ApplicationController
     def create
       @task = Task.new(task_params)
       if @task.save
-        flash[:notice] = "Task was successfully created"
+        flash[:notice] = "Task was successfully created!"
          redirect_to task_path(@task)
       else
         @task= Task.new(task_params)
@@ -41,6 +45,7 @@ class TasksController < ApplicationController
     def new
       @tasks = Task.new
     end
+  end
 
 
   private
@@ -48,4 +53,3 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:description)
   end
-end
