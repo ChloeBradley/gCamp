@@ -19,10 +19,11 @@
 
 
   <%= yield %>
-
+<footer>
   <div class="container">
-    <footer>
-      <div class="col-md-6"><hr>
+    <hr>
+    <div class= "row">
+      <div class="col-md-6">
         <%= link_to "Terms", terms_path() %> |
         <%= link_to "About", about_path() %> |
         <%= link_to "FAQ",  faq_path() %> |
@@ -30,14 +31,16 @@
       </div>
 
 
-      <div class="col-md-6 text-right"><hr>
+      <div class="col-md-6 text-right">
         <%= link_to image_tag('linkedin.jpg', class: 'custom_image'),'https://www.linkedin.com/in/ChloeBradley1' %>
         <%= link_to image_tag('Github.png', class: 'custom_image'),'https://github.com/ChloeBradley' %>
         <%= link_to image_tag('twitter.png', class: 'custom_image'),'https://twitter.com/ccbradley77' %>
         <%= link_to image_tag('Galvanize.png', class: 'custom_image'),'https://www.galvanize.it' %>
       </div>
-    </footer>
+    </div>
   </div>
+</footer>
+
 
 
 </body>
