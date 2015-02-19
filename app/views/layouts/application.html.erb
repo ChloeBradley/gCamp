@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Gcamp</title>
+  <title>gCamp</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -12,13 +12,14 @@
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
-        <%= link_to "Gcamp", root_path, class: "navbar-brand" %>
+        <%= link_to "gCamp", root_path, class: "navbar-brand" %>
       </div>
     </div>
   </nav>
 
-
+<!-- <div class='container'> -->
   <%= yield %>
+<!-- </div> -->
 <footer>
   <div class="container">
     <hr>

@@ -1,0 +1,36 @@
+<%= form_for @task, html: {class: 'form-horizontal'} do |f| %>
+
+  <div class= 'form-group'>
+      <%= f.label :description, class: 'col-sm-2 control-label'%>
+    <div class= 'col-sm-4'>
+      <%= f.text_field :description, class: 'form-control' %>
+    </div>
+  </div>
+
+  <!-- <div class= 'form-group'>
+    < %= f.label :due_date, class: 'col-sm-2 control-label'%>
+    <div class= 'col-sm-4'>
+      < %= f.date_field :due_date, class: 'form-control' %>
+    </div>
+  </div> -->
+
+  <% unless @task.new_record? %>
+    <div class= 'form-group'>
+      <div class= 'col-sm-offset-2 col-sm-10'>
+        <div class= 'checkbox'>
+          <label>
+            <%= f.check_box :complete %> Complete
+          </label>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class= 'form-group'>
+    <div class= 'col-sm-offset-2 col-sm-10'>
+      <%= f.submit "#{name_of_button} Task", class: 'btn btn-primary' %>
+      <%= link_to "Cancel", tasks_path, class: 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>
