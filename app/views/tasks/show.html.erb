@@ -1,17 +1,17 @@
 <div class= 'container'>
-  <% if notice %>
-  <div class="alert alert-success" role="alert"><center><%= notice %></center></div>
-  <% end %>
-    <h1><%= @task.description %></h1>
-    <ul class='breadcrumb'>
-      <li><%= link_to 'Tasks', tasks_path %></li>
-      <li><%= @task.description %></li>
-    </ul>
 
-<%= link_to 'Edit', edit_task_path %> |
-<%= link_to 'Back', tasks_path %>
+  <div class= 'page-header'>
+      <% if notice %>
+    <div class="alert alert-success" role="alert"><center><%= notice %></center></div>
+      <% end %>
 
-</div>
+          <%= link_to 'Edit', edit_task_path, class: "btn btn-info pull-right" %>
 
-
+          <h1><%= @task.description %></h1>
+          <ul class='breadcrumb'>
+        <li><%= link_to 'Tasks', tasks_path %></li>
+        <li><%= @task.description %></li>
+      </ul>
+  </div>
+  
 </div>
