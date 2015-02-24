@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
-<body>
+
 
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -17,7 +17,12 @@
     </div>
   </nav>
 
-<!-- <div class='container'> -->
+<div class='container'>
+<% flash.each do |name, msg| %>
+<center><%= content_tag :div, msg, :id => "flash_#{name}", class: 'alert alert-success'%></center>
+<% end %>
+</div>
+
   <%= yield %>
 <!-- </div> -->
 <footer>
