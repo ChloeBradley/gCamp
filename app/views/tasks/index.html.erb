@@ -21,7 +21,11 @@
     <% @tasks.each do |task| %>
     <tr>
       <td class= "col-sm-3">
-        <%= link_to task.description, task_path(task) %>
+        <% if task.complete %>
+          <strike><%= link_to task.description, task_path(task) %></strike>
+        <% else %>
+          <%= link_to task.description, task_path(task) %>
+        <% end %>
       </td>
 
       <td class= "col-sm-3">
