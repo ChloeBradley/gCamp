@@ -1,18 +1,15 @@
 <div class= 'container'>
 
   <div class= 'page-header'>
-      <% if notice %>
-    <div class="alert alert-success" role="alert"><center><%= notice %></center></div>
-      <% end %>
 
           <%= link_to 'Edit', edit_task_path, class: "btn btn-info pull-right" %>
 
           <h1><%= @task.description %></h1>
+        </div>
+
           <ul class='breadcrumb'>
         <li><%= link_to 'Tasks', tasks_path %></li>
         <li><%= @task.description %></li>
         <li> <%= @task.due_date %></li>
       </ul>
-  </div>
-
 </div>
