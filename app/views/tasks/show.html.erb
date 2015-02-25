@@ -13,7 +13,12 @@
   </div>
 
         <ul class='breadcrumb'>
-        <li><%= link_to 'Tasks', tasks_path %></li>
-        <li><%= @task.description %></li>
-      </ul>
+          <li><%= link_to 'Tasks', tasks_path %></li>
+          <li><%= @task.description %></li>
+        </ul>
+    <div>
+      <b> Due On:
+        <%= @task.due_date.strftime("%m/%d/%y") %>
+      </b>
+    </div>
 </div>
