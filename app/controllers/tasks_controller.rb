@@ -9,8 +9,9 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
+     @task = Task.find(params[:id])
   end
+
 
     def destroy
       task= Task.find(params[:id])
@@ -24,7 +25,7 @@ class TasksController < ApplicationController
         flash[:notice] = "Task was successfully created!"
          redirect_to task_path(@task)
       else
-        render:new
+        render :new
       end
     end
 
