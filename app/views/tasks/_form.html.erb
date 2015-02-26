@@ -1,6 +1,6 @@
 <%= form_for @task, html: {class: 'form-horizontal'} do |f| %>
 
-<%= render partial: "shared/_errors", locals: { name_of_button: "Update" %>
+<%= render partial: "shared/errors", locals: { object: @task } %>
 
 
   <div class= 'form-group'>
