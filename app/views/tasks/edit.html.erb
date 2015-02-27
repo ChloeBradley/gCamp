@@ -3,7 +3,7 @@
   <br>
   <ul class='breadcrumb'>
     <li><%= link_to 'Tasks', tasks_path %></li>
-    <li> <%= @task.description %></li>
+    <li> <%= link_to @task.description, task_path %></li>
     <li> edit </li>
   </ul>
 </div>
