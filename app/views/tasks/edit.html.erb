@@ -6,6 +6,14 @@
     <li> <%= link_to @task.description, task_path %></li>
     <li> edit </li>
   </ul>
+
+  <p>
+    <% if @task.due_date %>
+    <strong>Due On:</strong>
+      <%= @task.due_date.strftime("%m/%d/%Y") %>
+    <% end %>
+  </p>
+  
 </div>
 
 <%= render partial: "form", locals: { name_of_button: "Update"} %>
