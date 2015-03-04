@@ -54,4 +54,13 @@ require 'rails_helper'
       click_link "Edit User"
       click_link "Delete User"
     end
+
+    scenario 'can see validation message when first name is not present' do
+      visit new_user_path
+      fill_in :user_first_name, with: "I do not have a last name"
+      fill_in :user_email, with: "noname@noname.com"
+      click_button "Create User"
+      expect(page).to have_content '1 error prohibited this post from being saved:
+                                    Last name can\'t be blank'
+    end
 end
