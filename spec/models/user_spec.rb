@@ -11,4 +11,10 @@ describe User do
     @user.valid?
     expect(@user.errors[:first_name]).to include("can't be blank")
 end
+
+it 'should be invaild without last name' do
+  @user.update_attributes(last_name: "")
+  @user.valid?
+  expect(@user.errors[:last_name]).to include("can't be blank")
+end
 end
