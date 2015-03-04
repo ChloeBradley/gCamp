@@ -42,4 +42,15 @@ feature 'project' do
 
       expect(page).to have_content "Project was successfully deleted"
     end
+
+    scenario 'user can see validation method displayed' do
+      visit projects_path
+      click_link "New Project"
+      fill_in :project_name, with: ""
+      click_button "Create Project"
+      expect(page).to have_content '1 error prohibited this post from being saved:'
+
+
+      end
+
 end
