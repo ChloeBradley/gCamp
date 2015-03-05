@@ -50,7 +50,6 @@ feature 'project' do
       click_button "Create Project"
       expect(page).to have_content '1 error prohibited this post from being saved:'
 
-
       end
 
 end
