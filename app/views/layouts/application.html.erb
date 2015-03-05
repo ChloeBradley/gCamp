@@ -13,13 +13,14 @@
     <div class="container">
       <div class="navbar-header">
         <%= link_to "gCamp", root_path, class: "navbar-brand" %>
+
         <ul class="nav navbar-nav navbar-right">
-           <% if current_user %>
-             <li><%= link_to "#{current_user.first_name} #{current_user.last_name}", user_path(current_user) %></li>
-             <li><%= link_to "Sign out", sign_out_path %></li>
+          <% if current_user %>
+             <%= link_to "#{current_user.first_name} #{current_user.last_name}", user_path(current_user), class:"navbar-brand" %></li>
+             <li><%= link_to "Sign out", sign_out_path, class:"navbar-brand"%></li>
            <% else %>
-             <li><%= link_to "Sign In", sign_in_path %></li>
-             <li><%= link_to "Sign Up", sign_up_path %></li>
+             <li><%= link_to "Sign In", sign_in_path, class:"navbar-brand" %></li>
+             <li><%= link_to "Sign Up", sign_up_path, class:"navbar-brand" %></li>
            <% end %>
          </ul>
           </div>
