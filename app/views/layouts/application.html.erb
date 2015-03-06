@@ -5,13 +5,12 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 
 
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
-      <div class="navbar-header">
         <%= link_to "gCamp", root_path, class: "navbar-brand" %>
 
         <ul class="nav navbar-nav navbar-right">
@@ -23,7 +22,6 @@
              <li><%= link_to "Sign Up", sign_up_path, class:"navbar-brand" %></li>
            <% end %>
          </ul>
-          </div>
       </div>
     </div>
   </nav>
