@@ -26,11 +26,12 @@
     </div>
   </nav>
 
-<div class='container'>
-<% flash.each do |name, msg| %>
-<center><%= content_tag :div, msg, :id => "flash_#{name}", class: 'alert alert-success'%></center>
-<% end %>
-</div>
+  <div class= 'container'>
+
+    <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, :id => "flash_#{name}", class: "alert alert-#{name}" %>
+    <% end %>
+  </div>
 
   <%= yield %>
 
@@ -42,11 +43,12 @@
       <div class="col-md-6">
         <%= link_to "Terms", terms_path() %> |
         <%= link_to "About", about_path() %> |
-        <%= link_to "FAQ",  faq_path() %> |
-        <%= link_to "Tasks",  tasks_path() %> |
+        <%= link_to "FAQ",  faq_path() %>
+        <% if current_user %>
+        | <%= link_to "Tasks",  tasks_path() %> |
         <%= link_to "Users", users_path() %> |
         <%= link_to "Projects", projects_path() %>
-
+        <% end %>
       </div>
 
       <div class="col-md-6 text-right">

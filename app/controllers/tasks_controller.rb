@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+  before_action :authenticate_user
+
   def index
     @tasks = Task.all
   end
@@ -22,7 +24,7 @@ class TasksController < ApplicationController
     def create
       @task = Task.new(task_params)
       if @task.save
-        flash[:notice] = "Task was successfully created!"
+        flash[:success] = "Task was successfully created!"
          redirect_to task_path(@task)
       else
         render :new
@@ -32,7 +34,7 @@ class TasksController < ApplicationController
     def update
     @task = Task.find(params[:id])
     if @task.update(task_params)
-      flash[:notice] = "Task was successfully updated!"
+      flash[:success] = "Task was successfully updated!"
       redirect_to task_path(@task)
     else
       render :edit
