@@ -1,0 +1,38 @@
+
+
+<div class="col-sm-12">
+  <div class="well col-md-5 col-sm-offset-3">
+    <div class="form-group">
+      <h2 class = "page-header">Sign into gCamp!</h2>
+
+
+<div class="form-horizontal">
+  <%= form_for User url: sign_in_path do |f| %>
+
+
+
+   <div class="form-group"></div>
+     <%= f.label :password, class: "pull-left control-label" %>
+     <div class="col-md-4"></div>
+      <%= f.password_field :password, class: "col-sm-12 form-control" %>
+
+
+
+   <div class="form-group"></div>
+     <%= f.label :password_confirmation, class: "pull-left control-label" %>
+     <div class="col-md-4"></div>
+      <%= f.password_field :password_confirmation, class: "col-sm-12 form-control" %>
+
+
+
+           <div class="form-group">
+             <div class="col-sm-6 pull-left"><br>
+               <%= f.submit "Sign In", class: "btn btn-default"%>
+             </div>
+           </div>
+
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
