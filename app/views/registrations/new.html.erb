@@ -3,9 +3,7 @@
   <div class="well col-md-5 col-sm-offset-3">
     <div class="form-group">
       <h2 class = "page-header">Sign up for gCamp!</h2>
-      <% if flash[:failure] %>
-        <strong><p class="text-danger"><%= flash[:failure] %></p></strong>
-      <% end %>
+
 
         <div class="form-horizontal">
           <%= form_for @user, url: sign_up_path do |f| %>
