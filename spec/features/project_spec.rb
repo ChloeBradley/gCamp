@@ -3,6 +3,14 @@ require 'rails_helper'
 feature 'project' do
 
   scenario 'user can see index page' do
+    login
+    visit projects_path
+    within ".page-header" do
+      expect(page).to have_content "Projects"
+    end
+  end
+
+  scenario 'project create' do
     project = Project.new(name: "Do gCamp stuff")
     project.save!
 
