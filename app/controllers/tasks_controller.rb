@@ -24,7 +24,6 @@ class TasksController < ApplicationController
 
 
     def create
-
     @task = @project.tasks.new(task_params)
       if @task.save
         flash[:success] = "Task was successfully created!"
