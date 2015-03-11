@@ -8,7 +8,7 @@
         <%= @task.description %>
       <% end %>
       <div class="pull-right">
-        <%= link_to "Edit", edit_task_path(@task), class: "btn btn-info" %>
+        <%= link_to "Edit", edit_project_task_path(params[:project_id], @task), class: "btn btn-info" %>
       </div>
     </h1>
   </div>
@@ -16,7 +16,7 @@
 
 
         <ol class='breadcrumb'>
-          <li><%= link_to 'Tasks', tasks_path %></li>
+          <li><%= link_to 'Tasks', project_tasks_path %></li>
           <li class="active"><%= @task.description %></li>
         </ol>
 

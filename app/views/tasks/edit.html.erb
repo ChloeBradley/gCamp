@@ -2,8 +2,8 @@
   <h1> Edit task </h1>
   <br>
   <ul class='breadcrumb'>
-    <li><%= link_to 'Tasks', tasks_path %></li>
-    <li> <%= link_to @task.description, task_path %></li>
+    <li><%= link_to 'Tasks', edit_project_task_path %></li>
+    <li> <%= link_to @task.description, edit_project_task_path %></li>
     <li> edit </li>
   </ul>
 
@@ -13,7 +13,7 @@
       <%= @task.due_date.strftime("%m/%d/%Y") %>
     <% end %>
   </p>
-  
+
 </div>
 
 <%= render partial: "form", locals: { name_of_button: "Update"} %>

@@ -13,9 +13,11 @@
   get 'about' => 'about#index'
   get '/faq'  => 'common_questions#index'
 
-  resources :tasks
+
   resources :users
-  resources :projects
+  resources :projects do
+    resources :tasks
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

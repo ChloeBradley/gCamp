@@ -8,5 +8,5 @@
 
     <h1><%= @project.name %></h1>
   </div>
-
+  <%= link_to pluralize((@project.tasks.count),'task'), project_tasks_path(@project) %>
 </div>
