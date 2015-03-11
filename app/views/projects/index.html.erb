@@ -6,39 +6,22 @@
 
 
   <table class = "table">
-    <thead>
-      <tr>
-        <th> Name </th>
-      </tr>
-    </thead>
+
+      <thead>
+        <tr>
+          <th><strong> Name </strong></th>
+          <th><strong>Task</strong></th>
+        </tr>
+      </thead>
+
     <% @projects.each do |project| %>
-      <tbody>
+    
         <tr>
           <td><%= link_to project.name, project_path(project) %></td>
+          <td><%= link_to project.tasks.count, project_tasks_path(project) %></td>
         </tr>
-      </tbody>
     <% end %>
   </table>
 
 
 </div>
-
-  <!-- <table class= "table">
-    <thead>
-      <tr>
-        <div class= "col-sm-1">
-        <th>Name</th>
-      </div>
-      </tr>
-    </thead>
-
-  <tbody>
-    <tr>
-      < % @projects.each do |project| %>
-      <td>
-        < %= project.name %>
-      </td>
-    </tr>
-    < % end %>
-  </tbody>
-</table> -->
