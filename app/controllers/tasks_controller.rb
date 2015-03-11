@@ -6,7 +6,11 @@ class TasksController < ApplicationController
   end
 
   def index
-    @tasks = Task.all
+    @tasks = @project.tasks
+  end
+
+  def new
+    @task = Task.new
   end
 
 
@@ -19,15 +23,9 @@ class TasksController < ApplicationController
   end
 
 
-  def destroy
-     @project = Project.find(params[:project_id])
-     Task.find(params[:id]).destroy
-     flash[:success] = "Task was successfully deleted."
-     redirect_to project_tasks_path(@project)
-   end
-
     def create
-      @task = Task.new(task_params)
+
+    @task = @project.tasks.new(task_params)
       if @task.save
         flash[:success] = "Task was successfully created!"
          redirect_to project_task_path(@project, @task)
@@ -46,9 +44,13 @@ class TasksController < ApplicationController
     end
   end
 
-    def new
-      @task = Task.new
-    end
+
+    def destroy
+       @project = Project.find(params[:project_id])
+       Task.find(params[:id]).destroy
+       flash[:success] = "Task was successfully deleted."
+       redirect_to project_tasks_path(@project)
+     end
 
 
   private

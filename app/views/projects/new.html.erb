@@ -1,7 +1,13 @@
-
 <div class= 'container'>
       <h1>New Project</h1>
     <hr>
+
+    <ol class='breadcrumb'>
+      <li> <%= link_to "Home", root_path %>
+      <li> <%= link_to 'Projects', projects_path %></li>
+      <li class="active">New Project</li>
+    </ol>
+    
 </div>
 
   <%= render partial: "form", locals: { name_of_button: "Create"} %>

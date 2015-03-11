@@ -1,6 +1,15 @@
 <div class= 'container'>
       <h1>Edit Project</h1>
     <hr>
+
+    <ol class='breadcrumb'>
+      <li> <%= link_to "Home", root_path %>
+      <li> <%= link_to 'Projects', projects_path %></li>
+      <li> <%= link_to @project.name, project_tasks_path(@project) %></li>
+
+      <li class="active">Edit</li>
+    </ol>
+
 </div>
 
 
