@@ -4,8 +4,10 @@
 <hr>
 
     <ul class='breadcrumb'>
+      <li><%= link_to 'Project', projects_path %></li>
+      <li><%= link_to @project.name, project_path(@project) %></li>
       <li><%= link_to 'Tasks', project_tasks_path %></li>
-      <li> New Task </li>
+      <li class="active">New Task </li>
     </ul>
 </div>
 
