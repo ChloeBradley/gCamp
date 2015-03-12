@@ -17,6 +17,6 @@
   resources :users
   resources :projects do
     resources :tasks
-    resources :membership
+    resources :memberships
   end
 end
