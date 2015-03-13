@@ -1,5 +1,7 @@
 class Membership < ActiveRecord::Base
 
+
+
   ROLE_MEMBER = 'Member'
   ROLE_USER = 'User'
   ROLE = [ROLE_MEMBER, ROLE_USER]
@@ -7,4 +9,9 @@ class Membership < ActiveRecord::Base
 
   belongs_to :project
   belongs_to :user
+
+
+  validates :user_id, presence: true
+  validates :role, presence: true
+
 end
