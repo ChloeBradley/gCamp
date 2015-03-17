@@ -28,4 +28,22 @@
             <%= @task.due_date.strftime("%m/%d/%Y") %>
           <% end %>
         </p>
-  </div>
+
+  <table>
+    <head><h3>Comments</h3></head>
+      <% @task.comment.each do |comment| %>
+        <div class="col-md-3">
+        <tr>
+          <div class="col-md-9 pull-right">
+          <textarea class="form-control" rows="5"></textarea><br>
+            <button type="submit" class="btn btn-primary">Add Comment</button>
+          </div>
+        </div>
+      </div>
+      <% end %>
+
+
+
+  </table>
+
+</div> <!-- container div-->

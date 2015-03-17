@@ -16,9 +16,6 @@ feature "Task" do
   end
 
   scenario "user can create new task" do
-    binding.pry
-    project = Project.new.create!(name:"Giant project")
-    project.save!
       user = User.create!(first_name:"John", last_name: "Doe", email: "john@example.com", password: "password")
       visit signin_path
       fill_in 'Email', with: user.email
@@ -28,10 +25,10 @@ feature "Task" do
       end
     end
 
-  xscenario "user can edit task" do
+  scenario "user can edit task" do
     task=Task.new(description:"string", due_date:"2015-03-12")
     task.save!
-    visit tasks_path
+    visit project_task_path
     click_link "Edit"
 
     expect(page).to have_content "Edit task"

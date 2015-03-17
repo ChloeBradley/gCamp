@@ -15,8 +15,14 @@
 
 
   resources :users
+
   resources :projects do
     resources :tasks
     resources :memberships
+
+    resources :tasks, only: [] do
+    resources :comments, only: [:create]
+
+    end
   end
 end
