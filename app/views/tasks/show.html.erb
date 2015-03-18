@@ -8,7 +8,7 @@
         <%= @task.description %>
       <% end %>
       <div class="pull-right">
-        <%= link_to "Edit", edit_project_task_path(params[:project_id], @task), class: "btn btn-info" %>
+        <%= link_to "Edit", edit_project_task_path(@project,@task), class: "btn btn-info" %>
       </div>
     </h1>
   </div>
@@ -29,21 +29,45 @@
           <% end %>
         </p>
 
-  <table>
-    <head><h3>Comments</h3></head>
-      <% @task.comment.each do |comment| %>
-        <div class="col-md-3">
-        <tr>
-          <div class="col-md-9 pull-right">
-          <textarea class="form-control" rows="5"></textarea><br>
-            <button type="submit" class="btn btn-primary">Add Comment</button>
+  <head><h3>Comments</h3></head>
+
+      <% @comments.each do |comment| %>
+        <p>
+        <div class="row">
+          <div class="col-md-3">
+            <% if comment.user == nil %>
+              <%= "Deleted User" %>
+            <% else %>
+          <%= link_to "#{comment.user.full_name}", user_path %>
+        <% end %>
+
+          <div class= "text-muted">
+            <%= "#{time_ago_in_words(comment.created_at)} ago" %>
           </div>
+
+      </div>
+        <div class="col-md-9 pull-right">
+          <%= comment.text %>
         </div>
       </div>
+    </p>
       <% end %>
 
 
 
-  </table>
+
+    <%= form_for([@task, @comment]) do |f| %>
+    <p>
+      <div class="col-md-9 pull-right">
+        <%= f.text_area :text, class: "form-control" %><br>
+          </p>
+            <%= f.submit "Add Comment", class: "btn btn-primary" %>
+              </div>
+
+
+            <% end %>
+
+
+
 
 </div> <!-- container div-->

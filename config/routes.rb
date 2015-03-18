@@ -19,10 +19,9 @@
   resources :projects do
     resources :tasks
     resources :memberships
+  end
 
-    resources :tasks, only: [] do
+  resources :tasks, only: [] do
     resources :comments, only: [:create]
-
-    end
   end
 end
