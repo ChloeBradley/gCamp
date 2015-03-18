@@ -38,7 +38,7 @@
             <% if comment.user == nil %>
               <%= "Deleted User" %>
             <% else %>
-          <%= link_to "#{comment.user.full_name}", user_path %>
+          <%= link_to "#{comment.user.full_name}", user_path(comment.user) %>
         <% end %>
 
           <div class= "text-muted">

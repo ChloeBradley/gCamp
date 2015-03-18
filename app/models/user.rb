@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 
   has_many :memberships
   has_many :tasks, through: :projects
+  has_many :comments, through: :tasks
 
   has_secure_password
 
