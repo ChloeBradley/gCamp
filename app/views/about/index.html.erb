@@ -3,34 +3,23 @@
 
 <div class="container">
 
-  <div class="page-header">
-    <h1>About</h1>
-  </div>
+  <div class='container'>
 
+    <div class='page-header'>
+      <h1>About</h1>
+    </div>
 
-
-  <div class="body_container">
-
-    <div class="col-md-4">
-      <div class="media">
-        <div class="media-left media-middle">
-          <a href="#">
-            <%=image_tag("aboutimg.jpg", class: "img-responsive")%>
-          </a>
-        </div>
+  <div class='row'>
+      <div class='col-md-4'>
+        <%=image_tag('aboutimg.jpg', class:'img-responsive')%>
       </div>
-    </div>
 
-
-    <div class="media-body">
-      <p>We are dedicated to the makers, the creators, the risk-takers.
-      </p>
-      <br>
-      <p>We wake up in the middle of the night and furiously write down ideas about how to make your online life better.
-      </p>
-      <br/>
-      <p>Human collaboration and communication is what drives us, and it infuses every feature of gCamp.
-      </p>
-    </div>
+      <div class='col-md-8'>
+        <p> We are dedicated to the makers, the creators, the risk-takers.</p>
+        <p> We wake up in the middle of the night and furiously write down ideas about how to make your online life better.</p>
+        <p>Human collaboration and communication is what drives us, and it infuses every feature of gCamp.</p>
+      </div>
   </div>
-</div> <!--container closed-->
+
+  <strong><p>gCamp is extremely active. Check out our killer stats below!</p></strong>
+  <strong><p><%="#{pluralize(@projects.count, "Project")}, #{pluralize(@tasks.count, "Task")}, #{pluralize(@memberships.count, "Project Member")}, #{pluralize(@users.count, "User")}, #{pluralize(@comments.count, "Comment")}" %></p></strong>
