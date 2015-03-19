@@ -26,9 +26,9 @@ feature "Task" do
     end
 
   scenario "user can edit task" do
-    task=Task.new(description:"string", due_date:"2015-03-12")
-    task.save!
-    visit project_task_path
+    project = Project.create!(name:"project")
+    task=Task.create!(description:"string", due_date:"2015-03-12", project_id: project.id)
+    visit project_task_path(project,task)
     click_link "Edit"
 
     expect(page).to have_content "Edit task"

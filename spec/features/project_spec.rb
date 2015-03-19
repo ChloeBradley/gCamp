@@ -70,7 +70,7 @@ feature 'project' do
       project = Project.new(name: "Do gCamp stuff")
       project.save!
       visit project_path(project)
-      within ".page-header" do
+      within ".well" do
       click_link "Destroy"
     end
   end
