@@ -49,18 +49,36 @@ feature "Task" do
     expect(page).to have_content "03/03/2014"
   end
 
-  xscenario "users can delete a task" do
-    task=Task.new(description:"string", due_date:"2015-03-12")
-    task.save!
-    visit tasks_path
-    click_link "Destroy"
+  scenario "users can delete a task" do
+    user = User.create!(first_name:"John", last_name: "Doe", email: "john@example.com", password: "password")
+    project = Project.create!(name:"project")
+    task=Task.create!(description:"string", due_date:"2015-03-12", project_id: project.id)
+    visit signin_path
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    within ".form-horizontal" do
+      click_on 'Sign In'
+  end
+    click_link "1"
+    page.find(".glyphicon-remove").click
+    expect(page).to have_content "Task was successfully deleted."
+
   end
 
-  xscenario 'can see validations without a description' do
-    visit new_task_path
-    fill_in :task_due_date, with: "2015-03-12"
-    click_button "Create Task"
+  scenario 'can see validations without a description' do
+    user = User.create!(first_name:"John", last_name: "Doe", email: "john@example.com", password: "password")
+    project = Project.create!(name:"project")
+    task=Task.create!(description:"string", due_date:"2015-03-12", project_id: project.id)
+    visit signin_path
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    within ".form-horizontal" do
+      click_on 'Sign In'
+    end
+    click_link "New Project"
+    fill_in :project_name, with: ""
+    click_button "Create Project"
     expect(page).to have_content '1 error prohibited this post from being saved:
-                                  Description can\'t be blank'
+                                  Name can\'t be blank'
   end
 end
