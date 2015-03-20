@@ -16,7 +16,7 @@ feature 'User signup flow' do
     fill_in :user_password_confirmation, with: 'bigcash'
     click_button 'Sign Up'
 
-    expect(current_path).to eq '/'
+    expect(current_path).to eq '/projects/new'
     expect(page).to have_content 'gCamp'
     expect(page).to have_content 'You have successfully signed up'
   end

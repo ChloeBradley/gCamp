@@ -11,8 +11,6 @@ feature 'project' do
     within ".form-horizontal" do
       click_on 'Sign In'
     end
-    expect(page).to have_content "gCamp"
-    click_on "Projects"
     expect(page).to have_content "Projects"
   end
 

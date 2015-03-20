@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+
 <html>
 <head>
   <title>gCamp</title>
@@ -11,7 +13,27 @@
 
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
-        <%= link_to "gCamp", root_path, class: "navbar-brand" %>
+        <%= link_to "gCamp", projects_path, class: "navbar-brand" %>
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <%= link_to(raw("Projects" +("<b class= 'caret'></b>")), projects_path, :class => "dropdown-toggle", :data => {:toggle=>"dropdown"}) %>
+                <ul class="dropdown-menu" role="menu">
+                  <% current_user.memberships.each do |member| %>
+                 <li> <%=  link_to "#{member.project.name}", project_path(member.project.id) %></li>
+                 <li class="divider"></li>
+                 <li> <%= link_to "New Project", new_project_path %></li>
+               </ul>
+              <% end %>
+            </li>
+          </ul>
+
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <%= link_to "Users", users_path %>
+            </li>
+          </ul>
+
+
 
         <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
@@ -40,22 +62,16 @@
   <div class="container">
     <hr>
     <div class= "row">
-      <div class="col-md-6">
-        <%= link_to "Terms", terms_path() %> |
-        <%= link_to "About", about_path() %> |
-        <%= link_to "FAQ",  faq_path() %>
-        <% if current_user %>
-        | <%= link_to "Users", users_path() %> |
-        <%= link_to "Projects", projects_path() %>
-        <% end %>
+      <div class="text-center">
+          <%= link_to "Terms", terms_path() %> |
+          <%= link_to "About", about_path() %> |
+          <%= link_to "FAQ",  faq_path() %>
+          <% if current_user %>
+          | <%= link_to "Users", users_path() %> |
+          <%= link_to "Projects", projects_path() %>
+          <% end %>
       </div>
 
-      <div class="col-md-6 text-right">
-        <%= link_to image_tag('linkedin.jpg', class: 'custom_image'),'https://www.linkedin.com/in/ChloeBradley1' %>
-        <%= link_to image_tag('Github.png', class: 'custom_image'),'https://github.com/ChloeBradley' %>
-        <%= link_to image_tag('twitter.png', class: 'custom_image'),'https://twitter.com/ccbradley77' %>
-        <%= link_to image_tag('Galvanize.png', class: 'custom_image'),'https://www.galvanize.it' %>
-      </div>
     </div>
   </div>
 </footer>

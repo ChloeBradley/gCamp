@@ -26,9 +26,17 @@ feature "Task" do
     end
 
   scenario "user can edit task" do
+    user = User.create!(first_name:"John", last_name: "Doe", email: "john@example.com", password: "password")
     project = Project.create!(name:"project")
     task=Task.create!(description:"string", due_date:"2015-03-12", project_id: project.id)
-    visit project_task_path(project,task)
+    visit signin_path
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    within ".form-horizontal" do
+      click_on 'Sign In'
+    end
+    expect(page).to have_content "Projects"
+    click_link "1"
     click_link "Edit"
 
     expect(page).to have_content "Edit task"
