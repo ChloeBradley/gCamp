@@ -1,5 +1,4 @@
-class AboutController < ApplicationController
-
+class AboutController < PublicController
 
   def index
     @projects = Project.all
