@@ -26,4 +26,12 @@ class ApplicationController < ActionController::Base
       redirect_to projects_path
     end
   end
+
+  def project_owner
+    @project = Project.find(params[:id])
+    if !(current_user.is_project_owner(@project))
+      flash[:danger] = "You do not have access"
+      redirect_to projects_path
+    end
+  end
 end
