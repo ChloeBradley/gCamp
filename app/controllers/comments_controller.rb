@@ -8,10 +8,9 @@ class CommentsController < ApplicationController
       @comment = @task.comments.new(comment_params)
       @comment.user_id = current_user.id
       if @comment.save
-        # flash[:success] = "Comment was successfully created!"
-        redirect_to project_task_path(@task[:project_id], @task)
+        redirect_to project_task_path(@task[:project_id], @task[:id])
       else
-        render "tasks/show"
+        redirect_to project_task_path(@task[:project_id], @task[:id])
       end
     end
 
