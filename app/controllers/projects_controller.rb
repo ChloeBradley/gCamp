@@ -1,8 +1,9 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user
+  before_action :project_member, only: [:edit, :show, :destroy, :update]
 
   def index
-    @projects = Project.all
+    @projects = current_user.projects
   end
 
   def new
@@ -12,7 +13,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     if @project.save
-      # @project.memberships.create(user_id: current_user.id, role: "Owner")
+       @project.memberships.create(user_id: current_user.id, role: "Owner")
       flash[:success] = "Project was successfully created"
       redirect_to projects_path
     else
@@ -46,6 +47,7 @@ class ProjectsController < ApplicationController
 
 
   private
+
   def project_params
     params.require(:project).permit(:name)
   end
