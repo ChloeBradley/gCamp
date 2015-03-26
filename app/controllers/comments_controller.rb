@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
         # flash[:success] = "Comment was successfully created!"
         redirect_to project_task_path(@task[:project_id], @task)
       else
-        render "task/show"
+        render "tasks/show"
       end
     end
 
