@@ -2,8 +2,8 @@ class MembershipsController < ApplicationController
   before_action do
     @project = Project.find(params[:project_id])
   end
-  before_action :find_member, only: [:index]
-
+  before_action :find_member, only: [:edit, :update]
+  before_action :find_user_for_now
     def index
      @membership = @project.memberships.new
    end
@@ -44,6 +44,16 @@ end
     end
 
     def find_member
+     @current_member = current_user.memberships.find_by(project_id: @project.id)
+     if @current_member.role == "Owner"
+
+     else
+       flash[:danger] = "You do not have access"
+       redirect_to project_path(@project)
+     end
+   end
+
+   def find_user_for_now
      @current_member = current_user.memberships.find_by(project_id: @project.id)
    end
 
