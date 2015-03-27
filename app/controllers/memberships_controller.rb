@@ -1,8 +1,8 @@
 class MembershipsController < ApplicationController
-  
   before_action do
     @project = Project.find(params[:project_id])
   end
+  before_action :find_member, only: [:index]
 
     def index
      @membership = @project.memberships.new
@@ -42,5 +42,9 @@ end
     def membership_params
       params.require(:membership).permit(:role, :project_id, :user_id)
     end
+
+    def find_member
+     @current_member = current_user.memberships.find_by(project_id: @project.id)
+   end
 
 end

@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
   before_action :project_member, only: [:edit, :show, :destroy, :update]
   before_action :project_owner, only: [:edit, :destroy, :update]
 
+
   def index
     @projects = current_user.projects
   end

@@ -14,11 +14,11 @@ class User < ActiveRecord::Base
 end
 
 def is_project_owner(project)
-  if project.memberships.find_by(user_id: self.id, role: Membership::ROLE_OWNER)
-    return true
-  else
-    false
-  end
+    if project.memberships.find_by(user_id: self.id, role: Membership::ROLE_OWNER)
+      return true
+    else
+      false
+    end
 end
 
 
