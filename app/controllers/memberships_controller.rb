@@ -34,7 +34,7 @@ end
     membership = @project.memberships.find(params[:id])
     membership.destroy
     flash[:success] = "#{membership.user.full_name} was successfully removed"
-    redirect_to project_memberships_path
+    redirect_to projects_path
   end
 
   private
