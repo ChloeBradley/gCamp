@@ -1,9 +1,12 @@
 class TasksController < ApplicationController
-  before_action :authenticate_user
+
 
   before_action do
     @project = Project.find(params[:project_id])
   end
+
+  before_action :authenticate_user
+  before_action :project_member_permission
 
   def index
     @tasks = @project.tasks
@@ -25,17 +28,17 @@ class TasksController < ApplicationController
   end
 
 
-    def create
+  def create
     @task = @project.tasks.new(task_params)
-      if @task.save
-        flash[:success] = "Task was successfully created!"
-         redirect_to project_task_path(@project, @task)
-      else
-        render :new
-      end
+    if @task.save
+      flash[:success] = "Task was successfully created!"
+       redirect_to project_task_path(@project, @task)
+    else
+      render :new
     end
+  end
 
-    def update
+  def update
     @task = Task.find(params[:id])
     if @task.update(task_params)
       flash[:success] = "Task was successfully updated!"
@@ -46,12 +49,20 @@ class TasksController < ApplicationController
   end
 
 
-    def destroy
-       @project = Project.find(params[:project_id])
-       Task.find(params[:id]).destroy
-       flash[:success] = "Task was successfully deleted."
-       redirect_to project_tasks_path(@project)
-     end
+  def destroy
+    @project = Project.find(params[:project_id])
+    Task.find(params[:id]).destroy
+    flash[:success] = "Task was successfully deleted."
+    redirect_to project_tasks_path(@project)
+  end
+
+  def project_member_permission
+    project = Project.find(params[:project_id])
+    if !current_user.is_project_member(project)
+      flash[:danger] = "You do not have access to that project"
+      redirect_to projects_path
+    end
+  end
 
 
   private

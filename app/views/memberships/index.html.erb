@@ -47,6 +47,8 @@
     <table class="table">
       <tbody>
         <% @project.memberships.each do |membership| %>
+          <!-- if current_user is an owner on the current project, display the form
+          else display links to user show and the user's role -->
           <tr>
             <% if membership.id %>
               <%= form_for [@project, membership], htm: {class: "form-inline"} do |f| %>
@@ -61,7 +63,7 @@
             <% end %>
             <% end %>
             <% end %>
-            </tr>
+          </tr>
         <% end %>
       </tbody>
     </table>
