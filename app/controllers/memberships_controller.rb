@@ -5,6 +5,9 @@ class MembershipsController < ApplicationController
   before_action :ensure_user_is_not_the_last_owner, only: [:update, :destroy]
   before_action :find_member, only: [:edit, :update]
   before_action :find_user_for_now
+
+  before_action :project_member
+
     def index
      @membership = @project.memberships.new
    end

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-   protect_from_forgery with: :exception
+  protect_from_forgery with: :exception
 
   helper_method :current_user
   helper_method :project_member
@@ -19,9 +19,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def project_member
-    @project = Project.find(params[:id])
-    if !(current_user.is_project_member(@project))
+
+  def project_member(project)
+    project = Project.find(params[:id])
+    if !current_user.is_project_member(project)
       flash[:danger] = "You do not have access to that project"
       redirect_to projects_path
     end
