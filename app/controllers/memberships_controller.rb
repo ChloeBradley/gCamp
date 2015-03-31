@@ -2,18 +2,17 @@ class MembershipsController < ApplicationController
   before_action do
     @project = Project.find(params[:project_id])
   end
+  before_action :set_membership, only: [:edit, :show, :update, :destroy]
   before_action :ensure_user_is_not_the_last_owner, only: [:update, :destroy]
-  before_action :find_member, only: [:edit, :update]
+  before_action :find_member, only: [:edit, :update, :destroy]
   before_action :find_user_for_now
 
-  before_action :project_member
 
     def index
      @membership = @project.memberships.new
    end
 
   def edit
-    @membership = Membership.find(params[:id])
   end
 
   def create
@@ -27,7 +26,6 @@ class MembershipsController < ApplicationController
 end
 
   def update
-    @membership = Membership.find(params[:id])
     if @membership.update(membership_params)
       flash[:success] = "#{@membership.user.full_name} was successfully updated"
       redirect_to project_memberships_path
@@ -35,10 +33,9 @@ end
   end
 
   def destroy
-    membership = @project.memberships.find(params[:id])
-    membership.destroy
-    flash[:success] = "#{membership.user.full_name} was successfully removed"
-    redirect_to projects_path
+    @membership.destroy
+    flash[:success] = "#{@membership.user.full_name} was successfully removed"
+    redirect_to project_memberships_path
   end
 
   private
@@ -56,14 +53,21 @@ end
        redirect_to project_path(@project)
      end
    end
+ 
+
 
    def find_user_for_now
      @current_member = current_user.memberships.find_by(project_id: @project.id)
    end
 
+   def set_membership
+     @membership = @project.memberships.find(params[:id])
+   end
+
   def ensure_user_is_not_the_last_owner
-    if !current_user.is_project_owner(@project) && @project.memberships.where(role: 'Owner').count <= 1
-      redirect_to projects_path
+    if current_user.is_project_owner(@project) && @project.memberships.where(role: 'Owner').count <= 1 && @membership.role == 'Owner'
+      flash[:danger] = 'Projects must have at least one owner'
+      redirect_to project_memberships_path(@project)
     end
   end
 end
