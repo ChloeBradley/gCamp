@@ -16,9 +16,9 @@ before_action :verify_user_access, only: [:edit, :update, :destroy]
   end
 
   def destroy
-    user.destroy
-    flash[:success] = "User was successfully deleted"
-    redirect_to users_path
+    if @user.destroy
+      redirect_to sign_in_path
+    end
   end
 
   def create
