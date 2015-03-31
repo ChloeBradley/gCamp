@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
 before_action :authenticate_user
+before_action :set_user, except: [:index, :new, :create]
+before_action :verify_user_access, only: [:edit, :update, :destroy]
+
 
   def index
     @users = User.all
@@ -7,15 +10,12 @@ before_action :authenticate_user
 
 
   def show
-    @user = User.find(params[:id])
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def destroy
-    user= User.find(params[:id])
     user.destroy
     flash[:success] = "User was successfully deleted"
     redirect_to users_path
@@ -32,7 +32,6 @@ before_action :authenticate_user
   end
 
   def update
-  @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:success] = "User was successfully updated!"
       redirect_to users_path
@@ -46,9 +45,20 @@ before_action :authenticate_user
   end
 
 
+
   private
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
   end
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def verify_user_access
+   unless current_user == @user
+     render file: 'public/404.html', status: :not_found, layout: false
+   end
+ end
 end

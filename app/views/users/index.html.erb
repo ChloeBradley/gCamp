@@ -6,32 +6,32 @@
   </div>
 
 
-  <table class= "table">
-    <thead>
+<table class= "table">
+  <thead>
       <tr>
         <div class= "col-sm-1">
-        <th>Name</th>
+          <td><strong>Name</strong></td>
         </div>
         <div class= "col-sm-3">
-        <th>Email</th>
-      </div>
+          <td><td><strong>Email</strong></td></td>
+        </div>
       </tr>
-    </thead>
+  </thead>
 
   <tbody>
     <% @users.each do |user| %>
-    <tr>
-      <td class= "col-sm-3">
-        <%= link_to user.first_name + " " + user.last_name, user_path(user) %></td>
-        <td class= "col-sm-1">
-        <%= mail_to user.email %>
-      </td>
-      <td>
-        <div class="pull-right">
-          <%= link_to 'Edit', edit_user_path(user) %>
-        </div>
-      </td>
-    </tr>
+      <tr>
+        <td class= "col-sm-3">
+         <%= link_to user.first_name + " " + user.last_name, user_path(user) %></td>
+           <td class= "col-sm-1">
+           <td><%= mail_to user.email %></td>
+           <td><% if user == current_user %>
+           <div class="pull-right">
+              <%= link_to 'Edit', edit_user_path(user) %></td>
+           </div>
+           <% end %>
+         </td>
+      </tr>
     <% end %>
   </tbody>
 </table>

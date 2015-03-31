@@ -26,4 +26,10 @@ class ApplicationController < ActionController::Base
       redirect_to projects_path
     end
   end
+
+    def four_oh_four_error
+    unless current_user(@user)
+      render file: 'public/404.html', status: :not_found, layout: false
+    end
+  end
 end
