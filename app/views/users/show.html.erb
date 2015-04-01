@@ -24,4 +24,12 @@
       <dd><a href= "mailto:<%= @user.email %>"><%= @user.email %></a></dd>
     </dl>
   <% end %>
+
+  <% if @user.tracker_token %>
+    <dl class="dl-horizontal">
+      <dt>Pivotal Tracker Token</dt>
+      <dd><%= @disguised_token %></dd>
+    </dl>
+  <% end %>
+
 </div>

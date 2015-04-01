@@ -9,6 +9,10 @@ before_action :verify_user_access, only: [:edit, :update, :destroy]
 
 
   def show
+    if @user.tracker_token
+      tracker_token = @user.tracker_token
+      @disguised_token = tracker_token[0..3] + "*" * (tracker_token.length - 4)
+    end
   end
 
   def edit
@@ -46,9 +50,9 @@ before_action :verify_user_access, only: [:edit, :update, :destroy]
 
   def user_params
     if current_user.admin
-       params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :admin)
+       params.require(:user).permit(:first_name, :last_name, :email, :password, :tracker_token, :password_confirmation, :admin)
      else
-       params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+       params.require(:user).permit(:first_name, :last_name, :email, :password, :tracker_token, :password_confirmation)
      end
    end
 

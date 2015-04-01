@@ -38,6 +38,13 @@
     </div>
   </div>
 
+  <div class= 'form-group'>
+      <%= f.label :tracker_token, "Pivitol Tracker Token", class: 'col-sm-2 control-label'%>
+    <div class= 'col-md-6'>
+      <%= f.text_field :tracker_token, class: 'form-control' %>
+    </div>
+  </div>
+
 <% if current_user.admin %>
   <div class="form-group">
     <div class="checkbox">
