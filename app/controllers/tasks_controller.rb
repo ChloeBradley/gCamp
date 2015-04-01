@@ -13,7 +13,7 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new
+  @task = Task.new
   end
 
 
@@ -50,7 +50,6 @@ class TasksController < ApplicationController
 
 
   def destroy
-    @project = Project.find(params[:project_id])
     Task.find(params[:id]).destroy
     flash[:success] = "Task was successfully deleted."
     redirect_to project_tasks_path(@project)

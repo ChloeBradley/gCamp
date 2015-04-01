@@ -8,12 +8,13 @@ class ApplicationController < ActionController::Base
 
 
   def current_user
-    @current_user ||= User.find_by(id: session[:user_id])
+    User.find_by(id: session[:user_id])
   end
 
 
   def authenticate_user
-    if !current_user
+    unless current_user
+      session[:initial_path] = request.fullpath
      flash[:danger] = "You must sign in"
      redirect_to sign_in_path
     end
@@ -27,9 +28,25 @@ class ApplicationController < ActionController::Base
     end
   end
 
-    def four_oh_four_error
-    unless current_user(@user)
-      render file: 'public/404.html', status: :not_found, layout: false
+  def current_user_or_admin(user)
+    user == current_user || current_user.admin
+  end
+
+  def project_member
+    project = Project.find(params[:id])
+    if !current_user.is_project_member(project)
+      flash[:danger] = "You do not have access to that project"
+      redirect_to projects_path
+    elsif
+      current_user == current_user.admin
     end
+  end
+
+  class AccessDenied < StandardError
+  end
+  rescue_from AccessDenied, with: :four_oh_four_error
+
+  def four_oh_four_error
+    render file: 'public/404.html', status: :not_found, layout: false
   end
 end

@@ -10,30 +10,24 @@
   <thead>
       <tr>
         <div class= "col-sm-1">
-          <td><strong>Name</strong></td>
-        </div>
-        <div class= "col-sm-3">
-          <td><td><strong>Email</strong></td></td>
-        </div>
+          <th>Name</th>
+          <th colspan= 2>Email</th>
       </tr>
   </thead>
-
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td class= "col-sm-3">
-         <%= link_to user.first_name + " " + user.last_name, user_path(user) %></td>
-           <td class= "col-sm-1">
-            </td>
-              <td><% if user == current_user %>
-          <div class="pull-right">
-               <%= mail_to user.email %>
-               <% elsif user == current_user %>
-              </td>
-               <%= link_to 'Edit', edit_user_path(user) %>
-           </div>
-           <% end %>
-         </td>
+        <td class: 'col-md-3'><%= link_to user.first_name + " " + user.last_name, user_path(user) %></td>
+        <td>
+        <% if current_user.co_member?(user) || user == current_user || current_user.admin  %>
+          <%= mail_to user.email %>
+        <% end %>
+        </td>
+        <td class: 'col-md-1'>
+        <% if user == current_user || current_user.admin %>
+          <%= link_to 'Edit', edit_user_path(user) %>
+        <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

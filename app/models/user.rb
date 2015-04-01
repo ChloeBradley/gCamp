@@ -6,20 +6,35 @@ class User < ActiveRecord::Base
   end
 
   def is_project_member(project)
-  if project.memberships.find_by(user_id: self.id)
-    return true
-  else
-    false
+    if project.memberships.find_by(user_id: self.id)
+      return true
+    else
+      false
+    end
   end
-end
 
-def is_project_owner(project)
+  def is_project_owner(project)
     if project.memberships.find_by(user_id: self.id, role: Membership::ROLE_OWNER)
       return true
     else
       false
     end
-end
+  end
+
+  def admin?
+    self.admin
+  end
+
+  def co_member?(user)
+    # user.projects.map {|project| project.users}.flatten.include?(self)
+    # user.projects.map {&:users}.flatten.include?(self)
+
+    results = []
+    user.projects.each do |project|
+      results << project.users
+    end
+    results.flatten.include?(self)
+  end
 
 
 

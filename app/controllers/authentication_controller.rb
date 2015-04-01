@@ -9,7 +9,7 @@ def create
   if user && user.authenticate(params[:password])
     session[:user_id] = user.id
     flash[:success] ='You have successfully signed in'
-    redirect_to projects_path
+    redirect_to session[:initial_path] || projects_path
   else
     @sign_in_error = "Email / Password combination is invalid"
     render :new
@@ -17,7 +17,7 @@ def create
 end
 
  def destroy
-   session[:user_id] = nil
+   session.clear
    flash[:success] = "You have successfully logged out"
    redirect_to root_path
  end

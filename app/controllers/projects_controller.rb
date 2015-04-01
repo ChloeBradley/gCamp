@@ -5,7 +5,11 @@ class ProjectsController < ApplicationController
 
 
   def index
-    @projects = current_user.projects
+    if current_user.admin?
+      @projects = Project.all
+    else
+      @projects = current_user.projects
+    end
   end
 
   def new
@@ -47,13 +51,6 @@ class ProjectsController < ApplicationController
     redirect_to projects_path, success: "Project was successfully deleted"
   end
 
-  def project_member
-    project = Project.find(params[:id])
-    if !current_user.is_project_member(project)
-      flash[:danger] = "You do not have access to that project"
-      redirect_to projects_path
-    end
-  end
 
   private
 

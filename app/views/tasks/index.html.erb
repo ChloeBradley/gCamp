@@ -30,9 +30,9 @@
     <tr>
       <td class= "col-sm-3">
         <% if task.complete %>
-          <strike><%= link_to task.description, project_task_path(params[:project_id], task) %></strike>
+          <strike><%= link_to task.description, project_task_path(@project, task) %></strike>
         <% else %>
-          <%= link_to task.description, project_task_path(params[:project_id],task) %>
+          <%= link_to task.description, project_task_path(@project,task) %>
           <a><span class="badge"><%= task.comments.count %></span></a>
         <% end %>
       </td>
@@ -45,8 +45,8 @@
 
       <td>
         <div class="pull-right">
-          <%= link_to 'Edit', edit_project_task_path(params[:project_id], task), class: "btn btn-info" %>
-          <%= link_to '', project_task_path(params[:project_id], task), method: :delete, class: "glyphicon glyphicon-remove" %>
+          <%= link_to 'Edit', edit_project_task_path(@project, task), class: "btn btn-info" %>
+          <%= link_to '', project_task_path(@project, task), method: :delete, class: "glyphicon glyphicon-remove" %>
         </div>
       </td>
     </tr>

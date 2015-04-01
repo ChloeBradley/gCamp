@@ -3,7 +3,6 @@ before_action :authenticate_user
 before_action :set_user, except: [:index, :new, :create]
 before_action :verify_user_access, only: [:edit, :update, :destroy]
 
-
   def index
     @users = User.all
   end
@@ -16,9 +15,8 @@ before_action :verify_user_access, only: [:edit, :update, :destroy]
   end
 
   def destroy
-    if @user.destroy
-      redirect_to sign_in_path
-    end
+    @user.destroy
+    redirect_to users_path
   end
 
   def create
@@ -44,21 +42,21 @@ before_action :verify_user_access, only: [:edit, :update, :destroy]
     @user = User.new
   end
 
-
-
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
-  end
+    if current_user.admin
+       params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :admin)
+     else
+       params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+     end
+   end
 
   def set_user
     @user = User.find(params[:id])
   end
 
   def verify_user_access
-   unless current_user == @user
-     render file: 'public/404.html', status: :not_found, layout: false
-   end
- end
+    raise AccessDenied unless current_user == @user || current_user.admin?
+  end
 end
