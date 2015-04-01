@@ -22,10 +22,10 @@
   <% end %>
 </table>
 
+ <% if current_user.tracker_token %>
 <h1>Pivotal Tracker Projects</h1>
 
-
-<table class = "table">
+  <table class = "table">
 
       <thead>
         <tr>
@@ -33,12 +33,13 @@
         </tr>
       </thead>
 
-  <% @tracker_projects.each do |tproject| %>
-    <tr>
-      <td> <%= tproject[:name] %> </td>
-    </tr>
-  <% end %>
-</table>
+    <% @tracker_projects.each do |tproject| %>
+      <tr>
+        <td> <%= tproject[:name] %> </td>
+      </tr>
+    <% end %>
+   <% end %>
+  </table>
 
 
 </div>
