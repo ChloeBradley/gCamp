@@ -61,9 +61,13 @@
             <% else %>
               <td> <%= membership.role.downcase %> </td>
             <% end %>
-            <td><% if membership.user_id == current_user.id || current_user.is_project_owner(@project) || current_user.admin %>
-              <%= link_to '', project_membership_path(@project, membership), method: :delete, class: "glyphicon glyphicon-remove" %></td>
-            <% end %>
+            <td>
+              <% if membership.user_id == current_user.id || current_user.is_project_owner(@project) || current_user.admin %>
+                <% unless @project.memberships.where(role: 'Owner').count == 1 && membership.role == 'Owner' %>
+                  <%= link_to '', project_membership_path(@project, membership), method: :delete, class: "glyphicon glyphicon-remove" %>
+                <% end %>
+              <% end %>
+            </td>
             </tr>
           <% end %>
         <% end %>
