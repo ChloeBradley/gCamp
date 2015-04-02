@@ -3,29 +3,26 @@ class MembershipsController < ApplicationController
     @project = Project.find(params[:project_id])
   end
   before_action :member_or_admin_auth, except: [:destroy]
-  before_action :set_membership, only: [:edit, :show, :update, :destroy]
+  before_action :set_membership, only: [:update, :destroy]
   before_action :ensure_user_is_not_the_last_owner, only: [:update, :destroy]
-  before_action :find_member, only: [:edit, :update, :destroy]
+  before_action :find_member, only: [:update, :destroy]
   before_action :find_user_for_now
-  before_action :cannot_delete_without_permissions, only: [:edit, :update, :destroy]
+  before_action :verify_owner_access, only: [:update, :destroy]
 
 
-    def index
-     @membership = @project.memberships.new
-   end
-
-  def edit
+  def index
+    @membership = @project.memberships.new
   end
 
   def create
     @membership = @project.memberships.new(membership_params)
     if @membership.save
-    flash[:success] = "#{@membership.user.full_name} was successfully added"
-    redirect_to project_memberships_path
+      flash[:success] = "#{@membership.user.full_name} was successfully added"
+      redirect_to project_memberships_path
     else
       render :index
+    end
   end
-end
 
   def update
     if @membership.update(membership_params)
@@ -37,6 +34,7 @@ end
   def destroy
     @membership.destroy
     flash[:success] = "#{@membership.user.full_name} was successfully removed"
+
     redirect_to project_memberships_path
   end
 
@@ -47,19 +45,17 @@ end
     end
 
     def find_member
-     @current_member = current_user.memberships.find_by(project_id: @project.id)
-     if @current_member.role == "Owner" || @current_member.user_id = current_user.id
-
-     else
-       flash[:danger] = "You do not have access"
-       redirect_to project_path(@project)
-     end
-   end
+      @current_member = current_user.memberships.find_by(project_id: @project.id)
+      unless @current_member.role == "Owner"
+        flash[:danger] = "You do not have access"
+        redirect_to project_path(@project)
+      end
+    end
 
    def cannot_delete_without_permissions
-     unless current_user.is_project_owner(@project) || current_user.admin || @project.memberships.pluck(:user_id).include?(current_user.id)
+     unless @project.memberships.where(user_id: current_user.id) || current_user.admin
+       flash[:danger] = 'You do not have access'
        redirect_to projects_path
-       flash[:danger] = "You do not have access to this project"
      end
    end
 
@@ -77,6 +73,10 @@ end
       flash[:danger] = 'Projects must have at least one owner'
       redirect_to project_memberships_path(@project)
     end
+  end
+
+  def verify_owner_access
+    raise AccessDenied unless current_user.is_project_owner(@project) || current_user.admin?
   end
 
   def member_or_admin_auth
