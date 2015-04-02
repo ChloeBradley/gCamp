@@ -49,7 +49,7 @@
         <% @project.memberships.each do |membership| %>
           <% if membership.id %>
             <tr>
-            <td> <%= link_to "#{membership.user.full_name}", user_path(membership.user) %></td>
+            <td> <%= link_to "#{membership.user_id.full_name}", user_path(membership.user_id) %></td>
             <% if current_user.is_project_owner(@project) || current_user.admin %>
               <%= form_for [@project, membership], htm: {class: "form-inline"} do |f| %>
                 <td> <%= f.collection_select(:role, Membership::ROLE, :to_s, :to_s, {}, {class: 'form-control'}) %></td>
