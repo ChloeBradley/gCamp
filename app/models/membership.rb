@@ -12,4 +12,6 @@ class Membership < ActiveRecord::Base
   validates :user_id, presence: true
   validates :role, presence: true
 
+  belongs_to :user, dependent: :destroy
+
 end

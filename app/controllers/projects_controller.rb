@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
 
 
   def index
-    if current_user.tracker_token
+    if current_user.tracker_token || current_user.admin?
        tracker_api = TrackerAPI.new
        @tracker_projects = tracker_api.projects(current_user.tracker_token)
      end
