@@ -1,4 +1,32 @@
-<%= @stories.each do |story| %>
-  <%= link_to "#{story[:name]}", story[:url]  %>
-  <hr>
-  <% end %>
+<div class = "container">
+  <header>
+    <div class="pull-right">
+        (showing first 500)
+    </div>
+    <h1><%=  "Stories For #{@project_name}" %></h1>
+  </header>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="col-md-7">Story</th>
+        <th class="col-md-2">Estimate</th>
+        <th class="col-md-1">Labels</th>
+        <th class="col-md-2">Current State</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @stories.each do |story| %>
+        <tr>
+          <td><%= link_to "#{story[:name]}", story[:url]  %></td>
+            <td><%= story[:estimate] %></td>
+            <% labels = story[:labels].map do |label| %>
+              <% label[:name] %>
+            <% end %>
+            <td><%= labels.join(',') %></td>
+            <td><%= story[:current_state] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

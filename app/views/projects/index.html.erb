@@ -22,7 +22,7 @@
   <% end %>
 </table>
 
-  <% if current_user.tracker_token && @tracker_projects[:code] != "invalid_authentication" %>
+  <% if current_user.tracker_token && @tracker_projects.class == Array %>
     <h1>Pivotal Tracker Projects</h1>
 
       <table class = "table">
@@ -34,7 +34,7 @@
 
         <% @tracker_projects.each do |tproject| %>
           <tr>
-            <td> <%= link_to tproject[:name], stories_path(tproject) %> </td>
+            <td> <%= link_to tproject[:name], stories_path(tproject[:id], project_name: tproject[:name]) %> </td>
           </tr>
         <% end %>
       </table>
