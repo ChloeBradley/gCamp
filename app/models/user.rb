@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
   validates :last_name, presence: true
   validates :email, uniqueness: true, presence: true
 
-  has_many :memberships
+  has_many :memberships, dependent: :destroy
   has_many :tasks, through: :projects
   has_many :comments, through: :tasks
   has_many :projects, through: :memberships
