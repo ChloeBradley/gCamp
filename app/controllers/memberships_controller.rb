@@ -47,7 +47,7 @@ end
 
     def find_member
      @current_member = current_user.memberships.find_by(project_id: @project.id)
-     if @current_member.role == "Owner"
+     if @current_member.role == "Owner" || @current_member.user_id = current_user.id
 
      else
        flash[:danger] = "You do not have access"
