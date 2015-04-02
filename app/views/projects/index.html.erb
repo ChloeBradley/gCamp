@@ -22,24 +22,23 @@
   <% end %>
 </table>
 
- <% if current_user.tracker_token %>
-<h1>Pivotal Tracker Projects</h1>
+  <% if current_user.tracker_token && @tracker_projects[:code] != "invalid_authentication" %>
+    <h1>Pivotal Tracker Projects</h1>
 
-  <table class = "table">
+      <table class = "table">
+          <thead>
+            <tr>
+              <th><strong> Name </strong></th>
+            </tr>
+          </thead>
 
-      <thead>
-        <tr>
-          <th><strong> Name </strong></th>
-        </tr>
-      </thead>
-
-    <% @tracker_projects.each do |tproject| %>
-      <tr>
-        <td> <%= link_to tproject[:name], stories_path(tproject) %> </td>
-      </tr>
-    <% end %>
-   <% end %>
-  </table>
+        <% @tracker_projects.each do |tproject| %>
+          <tr>
+            <td> <%= link_to tproject[:name], stories_path(tproject) %> </td>
+          </tr>
+        <% end %>
+      </table>
+  <% end %>
 
 
 </div>
