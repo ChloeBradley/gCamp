@@ -1,0 +1,4 @@
+<%= @stories.each do |story| %>
+  <%= link_to "#{story[:name]}", story[:url]  %>
+  <hr>
+  <% end %>
