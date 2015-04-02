@@ -1,8 +1,8 @@
 class PivotaltrackerController < ApplicationController
   def show
-    @project_name = params["name"]
+    @project_name = params["project_name"]
     tracker_api = TrackerAPI.new
-    proj_id = (params[:id])
+    proj_id = params["format"]
     @stories = tracker_api.stories(current_user.tracker_token, proj_id)
   end
 end
