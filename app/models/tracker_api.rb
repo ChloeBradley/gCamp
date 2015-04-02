@@ -13,4 +13,14 @@ class TrackerAPI
     JSON.parse(response.body, symbolize_names: true)
   end
 
+  def stories(token, proj_id)
+    response = @conn.get do |req|
+      req.url "/services/v5/projects/#{proj_id}/stories"
+      req.headers['Content-Type'] = 'application/json'
+      req.headers['X-TrackerToken'] = token
+    end
+    JSON.parse(response.body, symbolize_names: true)
+  end
+
+
 end

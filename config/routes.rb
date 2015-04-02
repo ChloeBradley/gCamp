@@ -13,7 +13,8 @@
   get 'about' => 'about#index'
   get '/faq'  => 'common_questions#index'
 
-
+  get 'stories' => 'pivotaltracker#show'
+  
   resources :users
 
   resources :projects do
