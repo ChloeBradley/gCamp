@@ -77,7 +77,8 @@ class MembershipsController < ApplicationController
 
   def verify_owner_access
     if @project.memberships.pluck(:user_id).include?(current_user.id)
-      raise AccessDenied unless current_user.is_project_owner(@project) || current_user.admin?
+      flash[:danger] = 'You do not have access to that project'
+      redirect_to projects_path
     end
   end
 
