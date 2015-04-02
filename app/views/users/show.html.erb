@@ -25,11 +25,11 @@
     </dl>
   <% end %>
 
-  <% if @user.tracker_token %>
     <dl class="dl-horizontal">
       <dt>Pivotal Tracker Token</dt>
-      <dd><%= @disguised_token %></dd>
+      <% if @user.tracker_token %>
+        <dd><%= @disguised_token %></dd>
+      <% end %>
     </dl>
-  <% end %>
 
 </div>
