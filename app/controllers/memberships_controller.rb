@@ -2,7 +2,6 @@ class MembershipsController < ApplicationController
   before_action do
     @project = Project.find(params[:project_id])
   end
-  before_action :member_or_admin_auth, except: [:destroy]
   before_action :set_membership, only: [:edit, :show, :update, :destroy]
   before_action :ensure_user_is_not_the_last_owner, only: [:update, :destroy]
   before_action :find_member, only: [:edit, :update, :destroy]
@@ -69,13 +68,6 @@ end
     if current_user.is_project_owner(@project) && @project.memberships.where(role: 'Owner').count <= 1 && @membership.role == 'Owner'
       flash[:danger] = 'Projects must have at least one owner'
       redirect_to project_memberships_path(@project)
-    end
-  end
-
-  def member_or_admin_auth
-    unless (current_user.project_member_verify(@project) || current_user.admin)
-      flash[:danger] = 'You do not have access to that project'
-      redirect_to projects_path
     end
   end
 end
