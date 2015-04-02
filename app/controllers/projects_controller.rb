@@ -5,16 +5,15 @@ class ProjectsController < ApplicationController
 
 
   def index
-    if current_user.tracker_token || current_user.admin?
-       tracker_api = TrackerAPI.new
-       @tracker_projects = tracker_api.projects(current_user.tracker_token)
-     end
-    if current_user.admin?
       @projects = Project.all
+       tracker_api = TrackerAPI.new
+    if current_user.tracker_token
+       @tracker_projects = tracker_api.projects(current_user.tracker_token)
     else
-      @projects = current_user.projects
-    end
-  end
+    #  flash[:danger] = "Looks like you have an invalid Pivotal Tracker Token.  Please update to view your connected projects"
+    #      @tracker_projects = {}
+     end
+   end
 
   def new
     @project = Project.new

@@ -5,6 +5,7 @@ class TrackerAPI
   end
 
   def projects(token)
+
     response = @conn.get do |req|
       req.url "/services/v5/projects"
       req.headers['Content-Type'] = 'application/json'
