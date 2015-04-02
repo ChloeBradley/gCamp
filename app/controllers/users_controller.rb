@@ -9,10 +9,6 @@ before_action :verify_user_access, only: [:edit, :update, :destroy]
 
 
   def show
-    if @user.tracker_token
-      tracker_token = @user.tracker_token
-      @disguised_token = tracker_token[0..3] + "*" * (tracker_token.length - 4)
-    end
   end
 
   def edit
