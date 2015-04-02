@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
   def hidden
-    if tracker_token != ""
+    if tracker_token != "" || tracker_token != nil
       stars = tracker_token.length - 4
       "#{tracker_token[0..3]}#{'*'*stars}"
     end
