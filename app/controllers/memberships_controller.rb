@@ -33,9 +33,13 @@ class MembershipsController < ApplicationController
 
   def destroy
     @membership.destroy
-    flash[:success] = "#{@membership.user.full_name} was successfully removed"
-
+    if current_user.id == @membership.user_id
+     flash[:success] = "#{@membership.user.full_name} was successfully removed"
+     redirect_to projects_path
+   else
+     flash[:success] = "#{@membership.user.full_name} was successfully removed"
     redirect_to project_memberships_path
+   end
   end
 
   private
@@ -76,7 +80,7 @@ class MembershipsController < ApplicationController
   end
 
   def verify_owner_access
-    unless @project.memberships.find_by(user_id: current_user.id).role == "Owner"
+    unless @project.memberships.find_by(user_id: current_user.id).role == "Owner" || @project.memberships.find(params[:id]).user.id == current_user.id
       if @project.memberships.pluck(:user_id).include?(current_user.id)
         flash[:danger] = 'You do not have access'
         redirect_to projects_path
