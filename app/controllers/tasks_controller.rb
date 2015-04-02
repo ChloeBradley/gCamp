@@ -57,7 +57,7 @@ class TasksController < ApplicationController
 
   def project_member_permission
     project = Project.find(params[:project_id])
-    if !current_user.is_project_member(project)
+    unless current_user.admin || current_user.is_project_member(project)
       flash[:danger] = "You do not have access to that project"
       redirect_to projects_path
     end

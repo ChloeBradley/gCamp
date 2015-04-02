@@ -36,11 +36,9 @@ class ApplicationController < ActionController::Base
 
   def project_member
     project = Project.find(params[:id])
-    if !current_user.is_project_member(project)
+    unless current_user.admin || current_user.is_project_member(project)
       flash[:danger] = "You do not have access to that project"
       redirect_to projects_path
-    elsif
-      current_user == current_user.admin
     end
   end
 

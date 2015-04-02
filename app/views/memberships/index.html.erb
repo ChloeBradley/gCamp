@@ -28,7 +28,7 @@
     </div>
   <% end %>
 </div>
-<% if @current_member.present? && @current_member.role == 'Owner' %>
+<% if (@current_member.present? && @current_member.role == 'Owner') || current_user.admin %>
   <div class="row">
     <%= form_for [@project, @membership], html: {class: "form-inline" } do |f| %>
       <div class='col-md-7'>
