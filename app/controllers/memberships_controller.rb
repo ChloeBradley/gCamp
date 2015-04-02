@@ -77,7 +77,7 @@ class MembershipsController < ApplicationController
 
   def verify_owner_access
     if @project.memberships.pluck(:user_id).include?(current_user.id)
-      flash[:danger] = 'You do not have access to that project'
+      flash[:danger] = 'You do not have access'
       redirect_to projects_path
     end
   end
