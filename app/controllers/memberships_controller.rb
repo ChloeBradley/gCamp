@@ -7,6 +7,7 @@ class MembershipsController < ApplicationController
   before_action :ensure_user_is_not_the_last_owner, only: [:update, :destroy]
   before_action :find_member, only: [:edit, :update, :destroy]
   before_action :find_user_for_now
+  before_action :cannot_delete_without_permissions, only: [:edit, :update, :destroy]
 
 
     def index
@@ -55,6 +56,12 @@ end
      end
    end
 
+   def cannot_delete_without_permissions
+     unless current_user.is_project_owner(@project) || current_user.admin || @project.memberships.pluck(:user_id).include?(current_user.id)
+       redirect_to projects_path
+       flash[:danger] = "You do not have access to this project"
+     end
+   end
 
 
    def find_user_for_now
