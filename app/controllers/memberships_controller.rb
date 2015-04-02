@@ -46,7 +46,7 @@ class MembershipsController < ApplicationController
 
     def find_member
       @current_member = current_user.memberships.find_by(project_id: @project.id)
-      unless @current_member.role == "Owner"
+      unless @current_member.role == "Owner" || @project.memberships.pluck(:user_id).include?(current_user.id)
         flash[:danger] = "You do not have access"
         redirect_to project_path(@project)
       end
@@ -76,7 +76,9 @@ class MembershipsController < ApplicationController
   end
 
   def verify_owner_access
-    raise AccessDenied unless current_user.is_project_owner(@project) || current_user.admin?
+    if !@project.memberships.pluck(:user_id).include?(current_user.id)
+      raise AccessDenied unless current_user.is_project_owner(@project) || current_user.admin?
+    end
   end
 
   def member_or_admin_auth
