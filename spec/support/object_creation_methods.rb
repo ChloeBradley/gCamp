@@ -14,7 +14,7 @@ def create_project(options = {})
   }.merge(options))
 end
 
-def create_memberships(options = {})
+def create_membership(options = {})
   Membership.create!({
     project_id: create_project.id,
     user_id: create_user.id,

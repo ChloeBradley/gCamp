@@ -4,7 +4,7 @@ feature "Task" do
   scenario "user can see index page" do
     task=Task.new(description:"Be a happy camper", due_date:"2015-03-12")
     task.save!
-    user = User.create!(first_name:"John", last_name: "Doe", email: "john@example.com", password: "password")
+    user = User.create!(first_name:"John", last_name: "Doe", email: "john@example.com", password: "password", admin: true)
     visit signin_path
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
@@ -16,7 +16,7 @@ feature "Task" do
   end
 
   scenario "user can create new task" do
-      user = User.create!(first_name:"John", last_name: "Doe", email: "john@example.com", password: "password")
+      user = User.create!(first_name:"John", last_name: "Doe", email: "john@example.com", password: "password", admin: true)
       visit signin_path
       fill_in 'Email', with: user.email
       fill_in 'Password', with: user.password
@@ -26,7 +26,7 @@ feature "Task" do
     end
 
   scenario "user can edit task" do
-    user = User.create!(first_name:"John", last_name: "Doe", email: "john@example.com", password: "password")
+    user = User.create!(first_name:"John", last_name: "Doe", email: "john@example.com", password: "password", admin: true)
     project = Project.create!(name:"project")
     task=Task.create!(description:"string", due_date:"2015-03-12", project_id: project.id)
     visit signin_path
@@ -50,7 +50,7 @@ feature "Task" do
   end
 
   scenario "users can delete a task" do
-    user = User.create!(first_name:"John", last_name: "Doe", email: "john@example.com", password: "password")
+    user = User.create!(first_name:"John", last_name: "Doe", email: "john@example.com", password: "password", admin: true)
     project = Project.create!(name:"project")
     task=Task.create!(description:"string", due_date:"2015-03-12", project_id: project.id)
     visit signin_path
@@ -66,7 +66,7 @@ feature "Task" do
   end
 
   scenario 'can see validations without a description' do
-    user = User.create!(first_name:"John", last_name: "Doe", email: "john@example.com", password: "password")
+    user = User.create!(first_name:"John", last_name: "Doe", email: "john@example.com", password: "password", admin: true)
     project = Project.create!(name:"project")
     task=Task.create!(description:"string", due_date:"2015-03-12", project_id: project.id)
     visit signin_path
@@ -75,7 +75,9 @@ feature "Task" do
     within ".form-horizontal" do
       click_on 'Sign In'
     end
-    click_link "New Project"
+    within '.navbar' do
+      click_link "New Project"
+    end
     fill_in :project_name, with: ""
     click_button "Create Project"
     expect(page).to have_content '1 error prohibited this post from being saved:

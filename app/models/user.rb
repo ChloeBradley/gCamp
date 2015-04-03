@@ -24,6 +24,8 @@ class User < ActiveRecord::Base
   def is_project_owner(project)
     if project.memberships.find_by(user_id: self.id, role: Membership::ROLE_OWNER)
       return true
+    elsif self.admin
+      true
     else
       false
     end

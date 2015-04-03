@@ -20,7 +20,7 @@
   <br>
   <%= link_to "#{pluralize(@project.memberships.count,"Membership")}", project_memberships_path(@project) %>
 
-<% if current_user.is_project_owner(@project) %>
+<% if current_user.is_project_owner(@project)%>
     <div class="well">
       <head>Delete Project<head>
         <p><%= "Deleting this project will also delete #{pluralize(@project.memberships.count,"membership")}" + ', ' + "#{pluralize(@project.tasks.count,"task")} and associated comments" %></p>
