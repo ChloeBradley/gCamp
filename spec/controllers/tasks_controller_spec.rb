@@ -4,8 +4,9 @@ describe TasksController do
   describe 'GET #index' do
     describe 'Permissions' do
       it 'it should redirect a non logged in user to the sign in path' do
+        project = create_project
 
-        get :index
+        get :index, project_id: project.id
 
         expect(response).to redirect_to sign_in_path
         expect(flash[:danger]).to eq 'You must sign in'
@@ -17,8 +18,9 @@ describe TasksController do
     describe 'Permissions' do
       it 'it should redirect a non logged in user to the sign in path' do
         project = create_project
+        task = create_task({project_id: project.id})
 
-        get :edit, id: project.id
+        get :edit, { project_id: project.id, id: task.id}
 
         expect(response).to redirect_to sign_in_path
         expect(flash[:danger]).to eq 'You must sign in'
@@ -27,11 +29,12 @@ describe TasksController do
       it 'should redirect a nonmember to projects path' do
         user = create_user
         project = create_project
+        task = create_task({project_id: project.id})
         session[:user_id] = user.id
 
-        get :edit, id: project.id task_id: task.id
+        get :edit, { project_id: project.id, id: task.id }
 
-        expect(response).to redirect_to projects task_path
+        expect(response).to redirect_to projects_path
         expect(flash[:danger]).to eq 'You do not have access to that project'
       end
     end
@@ -40,8 +43,9 @@ describe TasksController do
   describe 'GET #new' do
     describe 'Permissions' do
       it 'it should redirect a non logged in user to the sign in path' do
+        project = create_project
 
-        get :new
+        get :new, { project_id: project.id }
 
         expect(response).to redirect_to sign_in_path
         expect(flash[:danger]).to eq 'You must sign in'
@@ -52,8 +56,9 @@ describe TasksController do
   describe 'post #create' do
     describe 'Permissions' do
       it 'it should redirect a non logged in user to the sign in path' do
+        project = create_project
 
-        post :create, project: { name: 'This is cool' }
+        post :create, project_id: project.id
 
         expect(response).to redirect_to sign_in_path
         expect(flash[:danger]).to eq 'You must sign in'
@@ -65,8 +70,9 @@ describe TasksController do
     describe 'Permissions' do
       it 'should redirect a non logged in user to the sign in path' do
         project = create_project
+        task = create_task
 
-        get :show, id: project.id, task_id: task.id
+        get :show, project_id: project.id, id: task.id
         expect(response).to redirect_to sign_in_path
         expect(flash[:danger]).to eq 'You must sign in'
       end
@@ -75,8 +81,9 @@ describe TasksController do
         user = create_user
         session[:user_id] = user.id
         project = create_project
+        task = create_task(project_id: project.id)
 
-        get :show, id: project.id
+        get :show, project_id: project.id, id: task.id
         expect(response).to redirect_to projects_path
         expect(flash[:danger]).to eq 'You do not have access to that project'
       end
@@ -87,8 +94,9 @@ describe TasksController do
     describe 'permissions'do
       it 'should redirect a non logged in user to the sign in path' do
         project = create_project
+        task = create_task(project_id: project.id)
 
-        patch :update, id: project.id
+        patch :update, project_id: project.id, id: task.id
         expect(response).to redirect_to sign_in_path
         expect(flash[:danger]).to eq 'You must sign in'
       end
@@ -97,48 +105,37 @@ describe TasksController do
         user = create_user
         session[:user_id] = user.id
         project = create_project
+        task = create_task(project_id: project.id)
 
-        patch :update, id: project.id
+        patch :update, project_id: project.id, id: task.id
         expect(response).to redirect_to projects_path
         expect(flash[:danger]).to eq 'You do not have access to that project'
-      end
-
-      it 'should redirect a member to projects path' do
-        user = create_user
-        session[:user_id] = user.id
-        project = create_project
-         membership = create_membership(project_id: project.id, user_id: user.id)
-
-        expect{
-          patch :update, id: project.id, project: {name: 'Change this name'}
-        }.to_not change { project.reload.name }
-
-        expect(response).to redirect_to projects_path
-        expect(flash[:danger]).to eq 'You do not have access'
       end
     end
   end
 
    describe 'delete #destroy' do
-     it 'admin is able to delete a project' do
+     it 'admin is able to delete a task' do
      user = create_user(admin: true)
      session[:user_id] = user.id
      project = create_project
+     task = create_task(project_id: project.id)
 
      expect{
-       delete :destroy, id: project.id
-     }.to change {Project.count}.by(-1)
+       delete :destroy, project_id: project.id, id: task.id
+     }.to change {project.tasks.count}.by(-1)
 
-     expect(flash[:success]).to eq 'Project was successfully deleted'
-     expect(response).to redirect_to projects_path
+     expect(flash[:success]).to eq 'Task was successfully deleted.'
+     expect(response).to redirect_to project_tasks_path(project)
     end
 
     it 'should redirect a visitor to sign in path' do
       project = create_project
+      task = create_task(project_id: project.id)
 
       expect{
-        delete :destroy, id: project.id
-      }.to_not change{Project.count}
+        delete :destroy, project_id: project.id, id: task.id
+      }.to_not change{project.tasks.count}
 
       expect(response).to redirect_to sign_in_path
       expect(flash[:danger]).to eq "You must sign in"
@@ -149,13 +146,13 @@ describe TasksController do
       project = create_project
       membership = create_membership(user_id: user.id, project_id: project.id, role: 'Member')
       session[:user_id] = user.id
+      task = create_task(project_id: project.id)
 
       expect{
-        delete :destroy, id: project.id
-      }.to_not change { Project.count }
+        delete :destroy, project_id: project.id, id: task.id
+      }.to change {project.tasks.count}.by(-1)
 
-      expect(response).to redirect_to projects_path
-      expect(flash[:danger]).to eq "You do not have access"
+      expect(response).to redirect_to project_tasks_path
      end
    end
 end

@@ -92,7 +92,7 @@ describe UsersController do
       expect(user.first_name).to eq("Jim")
       expect(user.last_name).to eq("Thome")
       expect(user.email).to eq("test2@success.com")
-      expect(response).to redirect_to user_path(user)
+      expect(response).to redirect_to users_path
     end
 
     it 'renders 404 if a user tries to update a user that is not theirs and they are not an admin' do
@@ -121,12 +121,11 @@ describe UsersController do
     end
 
     it "allows an admin to delete any user" do
-      user = create_user
+      user = create_user(admin: true)
       user2 = create_user(first_name: "James", last_name: "Brown", email: "1234@yahoo.com", password: "1234", password_confirmation: "1234" )
       session[:user_id] = user.id
       delete :destroy, id: user2
       expect(response).to redirect_to users_path
     end
   end
-
 end

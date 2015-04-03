@@ -22,6 +22,14 @@ def create_membership(options = {})
   }.merge(options))
 end
 
+def create_task(options = {})
+  Task.create!({
+    description: "string",
+    complete: true,
+    project_id: 2,
+  }.merge(options))
+end
+
 # user = create_user
 # project = create_project
 # membership = create_membership(project_id: project.id, user_id: user.id, role: 'Owner')
